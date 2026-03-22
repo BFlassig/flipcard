@@ -1,28 +1,45 @@
+<div align="center">
+
+<img src="demo/card-front.svg" width="480" alt="FlipCard Demo" />
+
 # FlipCard
 
-A minimal, accessible 3D flip card component for Next.js.
+**A minimal, accessible 3D flip card component for Next.js.**
 
-Click to flip — smooth CSS 3D rotation, hover tilt, keyboard accessible. No dependencies beyond Next.js and Tailwind CSS.
+Click to flip — smooth CSS 3D rotation, hover tilt, no dependencies.
 
-Originally built for a membership card in a production system. Extracted as a reusable standalone component.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-13+-000000?style=flat-square&logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3+-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-ready-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+
+</div>
 
 ---
 
-## Demo
+## Preview
 
-Open `demo/index.html` in any browser — no setup required.
+<div align="center">
+
+| Front | Back |
+|:-----:|:----:|
+| <img src="demo/card-front.svg" width="320" /> | <img src="demo/card-back.svg" width="320" /> |
+
+*Open `demo/index.html` in any browser to try the live interaction — no setup required.*
+
+</div>
 
 ---
 
 ## Features
 
-- 3D flip animation on click
-- Subtle hover tilt effect
-- Keyboard accessible — `Enter` or `Space` to flip
-- ARIA attributes for screen readers
-- Responsive width out of the box
-- Configurable aspect ratio — defaults to standard card ratio (`2042/1316`)
-- Uses Next.js `<Image>` for optimized loading
+- 🔄 &nbsp;Smooth 3D flip animation on click
+- 🖱️ &nbsp;Subtle hover tilt effect
+- ⌨️ &nbsp;Fully keyboard accessible — `Enter` or `Space` to flip
+- ♿ &nbsp;ARIA attributes for screen readers
+- 📱 &nbsp;Responsive width out of the box
+- ⚙️ &nbsp;Configurable aspect ratio — defaults to standard card format
+- 🖼️ &nbsp;Uses Next.js `<Image>` for optimized loading
 
 ---
 
@@ -35,7 +52,11 @@ Open `demo/index.html` in any browser — no setup required.
 
 ## Installation
 
-Copy `FlipCard.tsx` into your project — e.g. `components/FlipCard.tsx`.
+Copy `FlipCard.tsx` into your project:
+
+```bash
+cp FlipCard.tsx your-project/components/FlipCard.tsx
+```
 
 ---
 
@@ -57,20 +78,20 @@ import { FlipCard } from "@/components/FlipCard";
 
 ## Props
 
-| Prop          | Type     | Default           | Description                                       |
-|---------------|----------|-------------------|---------------------------------------------------|
-| `frontImage`  | `string` | —                 | Path or URL to the front image (required)         |
-| `backImage`   | `string` | —                 | Path or URL to the back image (required)          |
-| `frontAlt`    | `string` | `"Card front"`    | Alt text for the front image                      |
-| `backAlt`     | `string` | `"Card back"`     | Alt text for the back image                       |
-| `aspectRatio` | `string` | `"2042/1316"`     | CSS `aspect-ratio` value                          |
-| `hint`        | `string` | `"Click to flip"` | Label shown below the card — set to `""` to hide |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `frontImage` | `string` | — | Path or URL to the front image *(required)* |
+| `backImage` | `string` | — | Path or URL to the back image *(required)* |
+| `frontAlt` | `string` | `"Card front"` | Alt text for the front image |
+| `backAlt` | `string` | `"Card back"` | Alt text for the back image |
+| `aspectRatio` | `string` | `"2042/1316"` | CSS `aspect-ratio` value |
+| `hint` | `string` | `"Click to flip"` | Label below the card — set `""` to hide |
 
 ---
 
 ## Customization
 
-The card width is responsive by default (`280px` → `480px`). To override, wrap in your own container:
+Override the width by wrapping in your own container:
 
 ```tsx
 <div className="w-72">
@@ -82,7 +103,7 @@ The card width is responsive by default (`280px` → `480px`). To override, wrap
 
 ## Demo images
 
-Demo SVG cards are included in `demo/` — replace with your own images.
+Generic demo cards are included in `demo/` as SVG files. Replace them with your own images.
 
 ---
 

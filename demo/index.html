@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlipCard — Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: #0f1117;
+      color: #e5e7eb;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      width: 100%;
+    }
+
+    .card-wrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      color: #f9fafb;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      margin-top: 8px;
+      font-size: 15px;
+      color: #6b7280;
+    }
+
+    header code {
+      background: #1f2937;
+      color: #93c5fd;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .card-wrapper {
+      perspective: 1600px;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 480px;
+      aspect-ratio: 2042 / 1316;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+      border-radius: 20px;
+    }
+
+    .card-inner:focus {
+      outline: 2px solid #3b82f6;
+      outline-offset: 4px;
+    }
+
+    .card-inner.hovered:not(.flipped) {
+      transform: rotateY(8deg) translateY(-6px);
+    }
+
+    .card-inner.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      overflow: hidden;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    }
+
+    .card-face svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .card-back-face {
+      transform: rotateY(180deg);
+    }
+
+    .hint {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #4b5563;
+      text-align: center;
+    }
+
+    .footer {
+      margin-top: 48px;
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      padding: 16px 24px;
+      font-size: 13px;
+      color: #9ca3af;
+      text-align: center;
+      max-width: 480px;
+    }
+
+    .footer a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 540px) {
+      .card-inner { width: 90vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>FlipCard</h1>
+    <p>Click the card to flip it &nbsp;·&nbsp; <code>FlipCard.tsx</code> for React / Next.js</p>
+  </header>
+
+  <div class="card-wrapper">
+    <div
+      class="card-inner"
+      id="card"
+      tabindex="0"
+      role="button"
+      aria-pressed="false"
+      aria-label="Flip card"
+    >
+      <div class="card-face">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 310">
+          <defs>
+            <linearGradient id="bgf" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#1e3a5f"/>
+              <stop offset="100%" style="stop-color:#2d6a9f"/>
+            </linearGradient>
+            <linearGradient id="chip" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#d4a843"/>
+              <stop offset="100%" style="stop-color:#f0c96a"/>
+            </linearGradient>
+          </defs>
+          <rect width="480" height="310" rx="20" fill="url(#bgf)"/>
+          <circle cx="420" cy="-30" r="150" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="40"/>
+          <circle cx="420" cy="-30" r="100" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="30"/>
+          <circle cx="60" cy="340" r="120" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="30"/>
+          <text x="36" y="52" font-family="'Helvetica Neue',Arial,sans-serif" font-size="22" font-weight="700" fill="white" letter-spacing="2">MEMBER</text>
+          <text x="36" y="72" font-family="'Helvetica Neue',Arial,sans-serif" font-size="11" fill="rgba(255,255,255,0.55)" letter-spacing="3">CARD</text>
+          <rect x="36" y="110" width="54" height="42" rx="6" fill="url(#chip)"/>
+          <line x1="36" y1="124" x2="90" y2="124" stroke="rgba(0,0,0,0.15)" stroke-width="1"/>
+          <line x1="36" y1="138" x2="90" y2="138" stroke="rgba(0,0,0,0.15)" stroke-width="1"/>
+          <line x1="63" y1="110" x2="63" y2="152" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+          <text x="36" y="196" font-family="'Courier New',monospace" font-size="20" font-weight="500" fill="white" letter-spacing="3">1234  5678  9012  3456</text>
+          <text x="36" y="240" font-family="'Helvetica Neue',Arial,sans-serif" font-size="11" fill="rgba(255,255,255,0.5)" letter-spacing="2">CARDHOLDER NAME</text>
+          <text x="360" y="240" font-family="'Helvetica Neue',Arial,sans-serif" font-size="11" fill="rgba(255,255,255,0.5)" letter-spacing="2">VALID THRU</text>
+          <text x="36" y="264" font-family="'Helvetica Neue',Arial,sans-serif" font-size="16" font-weight="500" fill="white">Jane Doe</text>
+          <text x="360" y="264" font-family="'Helvetica Neue',Arial,sans-serif" font-size="16" font-weight="500" fill="white">12/28</text>
+          <g transform="translate(430,118)" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" stroke-linecap="round">
+            <path d="M0,16 Q8,8 0,0"/>
+            <path d="M6,19 Q18,9.5 6,-3"/>
+            <path d="M12,22 Q28,11 12,-6"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="card-face card-back-face">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 310">
+          <defs>
+            <linearGradient id="bgb" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#1e3a5f"/>
+              <stop offset="100%" style="stop-color:#2d6a9f"/>
+            </linearGradient>
+          </defs>
+          <rect width="480" height="310" rx="20" fill="url(#bgb)"/>
+          <rect x="0" y="44" width="480" height="52" fill="#1a1a1a"/>
+          <rect x="36" y="124" width="300" height="44" rx="4" fill="rgba(255,255,255,0.92)"/>
+          <rect x="36" y="124" width="300" height="12" fill="rgba(180,200,240,0.4)"/>
+          <rect x="36" y="136" width="300" height="10" fill="rgba(255,255,255,0.7)"/>
+          <rect x="36" y="146" width="300" height="10" fill="rgba(180,200,240,0.4)"/>
+          <rect x="36" y="156" width="300" height="12" fill="rgba(255,255,255,0.7)"/>
+          <rect x="346" y="124" width="60" height="44" rx="4" fill="white"/>
+          <text x="376" y="152" font-family="'Courier New',monospace" font-size="16" font-weight="700" fill="#1a1a1a" text-anchor="middle">•••</text>
+          <text x="36" y="196" font-family="'Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.5)" letter-spacing="1">AUTHORIZED SIGNATURE</text>
+          <text x="376" y="196" font-family="'Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.5)" letter-spacing="1" text-anchor="middle">CVV</text>
+          <text x="36" y="236" font-family="'Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">This card is property of the issuing organization.</text>
+          <text x="36" y="252" font-family="'Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.35)">If found, please return to the nearest branch.</text>
+          <text x="36" y="284" font-family="'Helvetica Neue',Arial,sans-serif" font-size="11" fill="rgba(255,255,255,0.5)" letter-spacing="1">www.example.com</text>
+          <text x="444" y="284" font-family="'Helvetica Neue',Arial,sans-serif" font-size="13" font-weight="700" fill="rgba(255,255,255,0.3)" text-anchor="end" letter-spacing="2">MEMBER</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <p class="hint">Click to flip</p>
+
+  <div class="footer">
+    React / Next.js component →
+    <a href="https://github.com/BFlassig" target="_blank">github.com/BFlassig</a>
+  </div>
+
+  <script>
+    const card = document.getElementById('card');
+    let flipped = false;
+
+    card.addEventListener('click', () => {
+      flipped = !flipped;
+      card.classList.toggle('flipped', flipped);
+      card.setAttribute('aria-pressed', String(flipped));
+    });
+
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+
+    card.addEventListener('mouseenter', () => card.classList.add('hovered'));
+    card.addEventListener('mouseleave', () => card.classList.remove('hovered'));
+  </script>
+
+</body>
+</html>
